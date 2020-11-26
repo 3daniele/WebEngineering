@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Creato il: Giu 03, 2020 alle 08:38
--- Versione del server: 5.7.26
--- Versione PHP: 7.4.2
+-- Host: 127.0.0.1
+-- Creato il: Nov 26, 2020 alle 11:51
+-- Versione del server: 10.4.11-MariaDB
+-- Versione PHP: 7.2.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,18 +18,19 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `GuidaTv`
+-- Database: `guidatv`
 --
-CREATE DATABASE IF NOT EXISTS `GuidaTv` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `GuidaTv`;
+CREATE DATABASE IF NOT EXISTS `guidatv` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `guidatv`;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Canale`
+-- Struttura della tabella `canale`
 --
 
-CREATE TABLE IF NOT EXISTS `Canale` (
+DROP TABLE IF EXISTS `canale`;
+CREATE TABLE IF NOT EXISTS `canale` (
   `numero` int(7) NOT NULL AUTO_INCREMENT,
   `nome` varchar(25) NOT NULL,
   `gruppo` varchar(25) NOT NULL,
@@ -38,10 +40,25 @@ CREATE TABLE IF NOT EXISTS `Canale` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Episodio`
+-- Struttura della tabella `editore`
 --
 
-CREATE TABLE IF NOT EXISTS `Episodio` (
+DROP TABLE IF EXISTS `editore`;
+CREATE TABLE IF NOT EXISTS `editore` (
+  `id_editore` int(11) NOT NULL AUTO_INCREMENT,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  PRIMARY KEY (`id_editore`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `episodio`
+--
+
+DROP TABLE IF EXISTS `episodio`;
+CREATE TABLE IF NOT EXISTS `episodio` (
   `id_episodio` int(7) NOT NULL AUTO_INCREMENT,
   `numero` int(7) NOT NULL,
   `descrizione` text NOT NULL,
@@ -53,43 +70,64 @@ CREATE TABLE IF NOT EXISTS `Episodio` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Film`
+-- Struttura della tabella `film`
 --
 
-CREATE TABLE IF NOT EXISTS `Film` (
+DROP TABLE IF EXISTS `film`;
+CREATE TABLE IF NOT EXISTS `film` (
   `id_film` int(7) NOT NULL AUTO_INCREMENT,
   `nome` varchar(25) NOT NULL,
-  `foto` text,
-  `descrizione` text,
-  `link` text,
+  `foto` text DEFAULT NULL,
+  `descrizione` text DEFAULT NULL,
+  `link` text DEFAULT NULL,
   `anno` year(4) DEFAULT NULL,
   `durata` time DEFAULT NULL,
-  PRIMARY KEY (`id_film`)
+  `editore` int(11) NOT NULL,
+  PRIMARY KEY (`id_film`),
+  KEY `editore` (`editore`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Genere`
+-- Struttura della tabella `genere`
 --
 
-CREATE TABLE IF NOT EXISTS `Genere` (
+DROP TABLE IF EXISTS `genere`;
+CREATE TABLE IF NOT EXISTS `genere` (
   `id_genere` int(7) NOT NULL AUTO_INCREMENT,
-  `nomr` varchar(25) NOT NULL,
+  `nome` varchar(25) NOT NULL,
   PRIMARY KEY (`id_genere`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `ListaGeneri`
+-- Struttura della tabella `lgf`
 --
 
-CREATE TABLE IF NOT EXISTS `ListaGeneri` (
-  `id_Ig` int(7) NOT NULL AUTO_INCREMENT,
-  `genere` int(7) NOT NULL,
-  `spettacolo` int(7) NOT NULL,
-  PRIMARY KEY (`id_Ig`),
+DROP TABLE IF EXISTS `lgf`;
+CREATE TABLE IF NOT EXISTS `lgf` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `film` int(11) NOT NULL,
+  `genere` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `film` (`film`),
+  KEY `genere` (`genere`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `lgs`
+--
+
+DROP TABLE IF EXISTS `lgs`;
+CREATE TABLE IF NOT EXISTS `lgs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `spettacolo` int(11) NOT NULL,
+  `genere` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `genere` (`genere`),
   KEY `spettacolo` (`spettacolo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -97,10 +135,11 @@ CREATE TABLE IF NOT EXISTS `ListaGeneri` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Programmazione`
+-- Struttura della tabella `programmazione`
 --
 
-CREATE TABLE IF NOT EXISTS `Programmazione` (
+DROP TABLE IF EXISTS `programmazione`;
+CREATE TABLE IF NOT EXISTS `programmazione` (
   `id_palinsesto` int(7) NOT NULL AUTO_INCREMENT,
   `canale` int(7) NOT NULL,
   `spettacolo` int(7) NOT NULL,
@@ -116,27 +155,61 @@ CREATE TABLE IF NOT EXISTS `Programmazione` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Salvataggio`
+-- Struttura della tabella `salvataggiocanali`
 --
 
-CREATE TABLE IF NOT EXISTS `Salvataggio` (
-  `id_salvataggio` int(7) NOT NULL AUTO_INCREMENT,
-  `utente` int(7) NOT NULL,
-  `entita` int(7) NOT NULL,
-  `tipo` int(7) NOT NULL,
-  PRIMARY KEY (`id_salvataggio`),
+DROP TABLE IF EXISTS `salvataggiocanali`;
+CREATE TABLE IF NOT EXISTS `salvataggiocanali` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `canale` int(11) NOT NULL,
+  `utente` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `utente` (`utente`),
-  KEY `entita` (`entita`),
-  KEY `tipo` (`tipo`)
+  KEY `canale` (`canale`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Spettacolo`
+-- Struttura della tabella `salvataggiogeneri`
 --
 
-CREATE TABLE IF NOT EXISTS `Spettacolo` (
+DROP TABLE IF EXISTS `salvataggiogeneri`;
+CREATE TABLE IF NOT EXISTS `salvataggiogeneri` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `utente` int(11) NOT NULL,
+  `genere` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `genere` (`genere`),
+  KEY `utente` (`utente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `salvataggioprogrammi`
+--
+
+DROP TABLE IF EXISTS `salvataggioprogrammi`;
+CREATE TABLE IF NOT EXISTS `salvataggioprogrammi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `utente` int(11) NOT NULL,
+  `spettacolo` int(11) NOT NULL,
+  `film` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `spettacolo` (`spettacolo`),
+  KEY `utente` (`utente`),
+  KEY `film` (`film`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `spettacolo`
+--
+
+DROP TABLE IF EXISTS `spettacolo`;
+CREATE TABLE IF NOT EXISTS `spettacolo` (
   `id_spettacolo` int(7) NOT NULL AUTO_INCREMENT,
   `nome` varchar(25) NOT NULL,
   `tipo` varchar(25) NOT NULL,
@@ -145,19 +218,22 @@ CREATE TABLE IF NOT EXISTS `Spettacolo` (
   `link` text NOT NULL,
   `anno` year(4) NOT NULL,
   `durata` time NOT NULL,
-  PRIMARY KEY (`id_spettacolo`)
+  `editore` int(11) NOT NULL,
+  PRIMARY KEY (`id_spettacolo`),
+  KEY `editore` (`editore`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Stagione`
+-- Struttura della tabella `stagione`
 --
 
-CREATE TABLE IF NOT EXISTS `Stagione` (
+DROP TABLE IF EXISTS `stagione`;
+CREATE TABLE IF NOT EXISTS `stagione` (
   `id_stagione` int(7) NOT NULL AUTO_INCREMENT,
   `numero` int(7) DEFAULT NULL,
-  `descrizione` text,
+  `descrizione` text DEFAULT NULL,
   `serietv` int(7) NOT NULL,
   PRIMARY KEY (`id_stagione`),
   KEY `serietv` (`serietv`)
@@ -166,10 +242,11 @@ CREATE TABLE IF NOT EXISTS `Stagione` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Utente`
+-- Struttura della tabella `utente`
 --
 
-CREATE TABLE IF NOT EXISTS `Utente` (
+DROP TABLE IF EXISTS `utente`;
+CREATE TABLE IF NOT EXISTS `utente` (
   `id_utente` int(7) NOT NULL AUTO_INCREMENT,
   `email` varchar(30) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -182,39 +259,73 @@ CREATE TABLE IF NOT EXISTS `Utente` (
 --
 
 --
--- Limiti per la tabella `Episodio`
+-- Limiti per la tabella `episodio`
 --
-ALTER TABLE `Episodio`
-  ADD CONSTRAINT `episodio_ibfk_1` FOREIGN KEY (`stagione`) REFERENCES `Stagione` (`id_stagione`);
+ALTER TABLE `episodio`
+  ADD CONSTRAINT `episodio_ibfk_1` FOREIGN KEY (`stagione`) REFERENCES `stagione` (`id_stagione`);
 
 --
--- Limiti per la tabella `ListaGeneri`
+-- Limiti per la tabella `film`
 --
-ALTER TABLE `ListaGeneri`
-  ADD CONSTRAINT `listageneri_ibfk_1` FOREIGN KEY (`genere`) REFERENCES `Genere` (`id_genere`),
-  ADD CONSTRAINT `listageneri_ibfk_2` FOREIGN KEY (`spettacolo`) REFERENCES `Spettacolo` (`id_spettacolo`);
+ALTER TABLE `film`
+  ADD CONSTRAINT `film_ibfk_1` FOREIGN KEY (`editore`) REFERENCES `editore` (`id_editore`);
 
 --
--- Limiti per la tabella `Programmazione`
+-- Limiti per la tabella `lgf`
 --
-ALTER TABLE `Programmazione`
-  ADD CONSTRAINT `programmazione_ibfk_2` FOREIGN KEY (`film`) REFERENCES `Film` (`id_film`),
-  ADD CONSTRAINT `programmazione_ibfk_4` FOREIGN KEY (`spettacolo`) REFERENCES `Episodio` (`id_episodio`),
-  ADD CONSTRAINT `programmazione_ibfk_5` FOREIGN KEY (`canale`) REFERENCES `Canale` (`numero`);
+ALTER TABLE `lgf`
+  ADD CONSTRAINT `lgf_ibfk_1` FOREIGN KEY (`film`) REFERENCES `film` (`id_film`),
+  ADD CONSTRAINT `lgf_ibfk_2` FOREIGN KEY (`genere`) REFERENCES `genere` (`id_genere`);
 
 --
--- Limiti per la tabella `Salvataggio`
+-- Limiti per la tabella `lgs`
 --
-ALTER TABLE `Salvataggio`
-  ADD CONSTRAINT `salvataggio_ibfk_1` FOREIGN KEY (`entita`) REFERENCES `Canale` (`numero`),
-  ADD CONSTRAINT `salvataggio_ibfk_2` FOREIGN KEY (`tipo`) REFERENCES `Spettacolo` (`id_spettacolo`),
-  ADD CONSTRAINT `salvataggio_ibfk_3` FOREIGN KEY (`utente`) REFERENCES `Utente` (`id_utente`);
+ALTER TABLE `lgs`
+  ADD CONSTRAINT `lgs_ibfk_1` FOREIGN KEY (`genere`) REFERENCES `genere` (`id_genere`),
+  ADD CONSTRAINT `lgs_ibfk_2` FOREIGN KEY (`spettacolo`) REFERENCES `spettacolo` (`id_spettacolo`);
 
 --
--- Limiti per la tabella `Stagione`
+-- Limiti per la tabella `programmazione`
 --
-ALTER TABLE `Stagione`
-  ADD CONSTRAINT `stagione_ibfk_1` FOREIGN KEY (`serietv`) REFERENCES `Spettacolo` (`id_spettacolo`);
+ALTER TABLE `programmazione`
+  ADD CONSTRAINT `programmazione_ibfk_2` FOREIGN KEY (`film`) REFERENCES `film` (`id_film`),
+  ADD CONSTRAINT `programmazione_ibfk_4` FOREIGN KEY (`spettacolo`) REFERENCES `episodio` (`id_episodio`),
+  ADD CONSTRAINT `programmazione_ibfk_5` FOREIGN KEY (`canale`) REFERENCES `canale` (`numero`);
+
+--
+-- Limiti per la tabella `salvataggiocanali`
+--
+ALTER TABLE `salvataggiocanali`
+  ADD CONSTRAINT `salvataggiocanali_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`id_utente`),
+  ADD CONSTRAINT `salvataggiocanali_ibfk_2` FOREIGN KEY (`canale`) REFERENCES `canale` (`numero`);
+
+--
+-- Limiti per la tabella `salvataggiogeneri`
+--
+ALTER TABLE `salvataggiogeneri`
+  ADD CONSTRAINT `salvataggiogeneri_ibfk_1` FOREIGN KEY (`genere`) REFERENCES `genere` (`id_genere`),
+  ADD CONSTRAINT `salvataggiogeneri_ibfk_2` FOREIGN KEY (`utente`) REFERENCES `utente` (`id_utente`);
+
+--
+-- Limiti per la tabella `salvataggioprogrammi`
+--
+ALTER TABLE `salvataggioprogrammi`
+  ADD CONSTRAINT `salvataggioprogrammi_ibfk_1` FOREIGN KEY (`spettacolo`) REFERENCES `spettacolo` (`id_spettacolo`),
+  ADD CONSTRAINT `salvataggioprogrammi_ibfk_2` FOREIGN KEY (`utente`) REFERENCES `utente` (`id_utente`),
+  ADD CONSTRAINT `salvataggioprogrammi_ibfk_3` FOREIGN KEY (`film`) REFERENCES `film` (`id_film`);
+
+--
+-- Limiti per la tabella `spettacolo`
+--
+ALTER TABLE `spettacolo`
+  ADD CONSTRAINT `spettacolo_ibfk_1` FOREIGN KEY (`editore`) REFERENCES `editore` (`id_editore`);
+
+--
+-- Limiti per la tabella `stagione`
+--
+ALTER TABLE `stagione`
+  ADD CONSTRAINT `stagione_ibfk_1` FOREIGN KEY (`serietv`) REFERENCES `spettacolo` (`id_spettacolo`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
