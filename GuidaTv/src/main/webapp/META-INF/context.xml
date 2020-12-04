@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/GuidaTv"/>
+<Context path="/GuidaTv">
+  <Resource 
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        auth="Container"
+        username="root"
+        password=""
+        url="jdbc:mysql://localhost/webeng_proj?serverTimezone=UTC"
+        name="jdbc/guidatv"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="5"
+        maxWait="10000"
+  />
+  
+</Context>
