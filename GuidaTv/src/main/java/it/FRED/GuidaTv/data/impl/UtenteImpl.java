@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package it.FRED.GuidaTv.data.impl;
-import it.FRED.GuidaTV.framework.data.DataItemImpl;
-import it.FRED.GuidaTV.data.model.Utente;
+
+import it.FRED.GuidaTv.data.model.Utente;
+import it.FRED.GuidaTv.framework.data.DataItemImpl;
+
 /**
  *
  * @author Francesca
@@ -24,25 +26,28 @@ public class UtenteImpl extends DataItemImpl<Integer> implements Utente{
         this.status=status;
     }
     
-    
-    String getEmail(){
+      @Override
+    public String getEmail(){
         return this.email;
     }
-    void setEmail(String t){
+      @Override
+    public void setEmail(String t){
         this.email = t; 
     }
-    
-    String getPassword(){
+      @Override
+    public String getPassword(){
         return this.password;
     }
-    void setPassowrd(String p){
+      @Override
+    public void setPassowrd(String p){
         this.password = p;
     }
-    
-    String getStatus(){
+      @Override
+    public String getStatus(){
         return this.status;
     }
-    void setStatus(String s){
+      @Override
+    public void setStatus(String s){
         this.status = s;
     }
     
