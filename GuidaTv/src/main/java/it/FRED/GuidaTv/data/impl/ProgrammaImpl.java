@@ -19,19 +19,22 @@ public class ProgrammaImpl  extends DataItemImpl<Integer> implements Programma {
    private String descrizione;
    private String tipo;
    private Utente editore;
+   private String immagine;
    
    public ProgrammaImpl(String tipo,Utente editore){
        this.editore = editore;
        this.tipo=tipo;
    }
    
-   public ProgrammaImpl(int durata,int anno, String descrizione,Utente editore, String tipo){
+   public ProgrammaImpl(int durata,int anno, String descrizione,Utente editore, String tipo, String immagine){
        this.durata = durata;
        this.anno = anno;
        this.descrizione = descrizione;
        this.editore = editore;
        this.tipo=tipo;
-   }
+       this.immagine=immagine;
+    }
+   
     @Override
     public int getDurata(){
        return this.durata;
@@ -72,6 +75,15 @@ public class ProgrammaImpl  extends DataItemImpl<Integer> implements Programma {
     @Override
     public void setTipo(String d){
         this.tipo = d;
+    }
+    
+    @Override
+    public String getImmagine(){
+        return this.immagine;
+    }
+    @Override
+    public void setImmagine(String link){
+        this.immagine=link;
     }
     
     

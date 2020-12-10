@@ -20,6 +20,7 @@ public interface Stagione extends DataItem<Integer>{
     int getNEpisodi();
     void setNEpisodi(int n);
     
-   
+    String getImmagine();
+    void setImmagine(String link);
     
 }

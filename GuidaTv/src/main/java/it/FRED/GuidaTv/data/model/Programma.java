@@ -26,4 +26,7 @@ public interface Programma extends DataItem<Integer>{
     String getTipo();
     void setTipo(String t);
     
+    String getImmagine();
+    void setImmagine(String link);
+    
 }
