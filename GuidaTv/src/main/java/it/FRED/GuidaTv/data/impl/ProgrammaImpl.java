@@ -5,25 +5,32 @@
  */
 package it.FRED.GuidaTv.data.impl;
 
-import it.FRED.GuidaTv.data.model.Editore;
-import it.FRED.GuidaTv.data.model.Film;
+import it.FRED.GuidaTv.data.model.Utente;
 import it.FRED.GuidaTv.framework.data.DataItemImpl;
+import it.FRED.GuidaTv.data.model.Programma;
 
 /**
  *
  * @author Francesca
  */
-public class FilmImpl  extends DataItemImpl<Integer> implements Film {
+public class ProgrammaImpl  extends DataItemImpl<Integer> implements Programma {
    private int durata;
    private int anno;
    private String descrizione;
-   private Editore editore;
-    
-   public FilmImpl(int durata,int anno, String descrizione,Editore editore){
+   private String tipo;
+   private Utente editore;
+   
+   public ProgrammaImpl(String tipo,Utente editore){
+       this.editore = editore;
+       this.tipo=tipo;
+   }
+   
+   public ProgrammaImpl(int durata,int anno, String descrizione,Utente editore, String tipo){
        this.durata = durata;
        this.anno = anno;
        this.descrizione = descrizione;
        this.editore = editore;
+       this.tipo=tipo;
    }
     @Override
     public int getDurata(){
@@ -50,11 +57,22 @@ public class FilmImpl  extends DataItemImpl<Integer> implements Film {
         this.descrizione = d;
     }
     @Override
-    public Editore getEditore(){
+    public Utente getEditore(){
         return this.editore;
     }
     @Override
-    public void setEditore(Editore d){
+    public void setEditore(Utente d){
         this.editore = d;
-    } 
+    }
+    
+    @Override
+    public String getTipo(){
+        return this.tipo;
+    }
+    @Override
+    public void setTipo(String d){
+        this.tipo = d;
+    }
+    
+    
 }

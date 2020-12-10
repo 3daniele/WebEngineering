@@ -11,13 +11,15 @@ import it.FRED.GuidaTv.framework.data.DataItem;
  */
 public interface Stagione extends DataItem<Integer>{
     
-    Spettacolo getSpettacolo();
-    void setSpettacolo(Spettacolo s);
+    Programma getProgramma();
+    void setProgramma(Programma s);
     
     int getNumero();
     void setNumero(int n);
     
     int getNEpisodi();
     void setNEpisodi(int n);
+    
+   
     
 }

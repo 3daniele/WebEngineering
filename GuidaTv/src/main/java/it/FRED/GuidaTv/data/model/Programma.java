@@ -9,13 +9,21 @@ import it.FRED.GuidaTv.framework.data.DataItem;
  *
  * @author DanieleDD
  */
-public interface Spettacolo extends DataItem<Integer>{
+public interface Programma extends DataItem<Integer>{
+    
     int getDurata();
     void setDurata(int d);
+    
+    int getAnno();
+    void setAnno(int a);
     
     String getDescrizione();
     void setDescrizione(String d);
     
-    Editore getEditore();
-    void setEditore(Editore d);
+    Utente getEditore();
+    void setEditore(Utente d);
+    
+    String getTipo();
+    void setTipo(String t);
+    
 }

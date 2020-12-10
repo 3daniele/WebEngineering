@@ -6,7 +6,7 @@
 package it.FRED.GuidaTv.data.impl;
 
 
-import it.FRED.GuidaTv.data.model.Spettacolo;
+import it.FRED.GuidaTv.data.model.Programma;
 import it.FRED.GuidaTv.data.model.Stagione;
 import it.FRED.GuidaTv.framework.data.DataItemImpl;
 
@@ -15,22 +15,22 @@ import it.FRED.GuidaTv.framework.data.DataItemImpl;
  * @author Francesca
  */
 public class StagioneImpl extends DataItemImpl<Integer> implements Stagione{
-    private Spettacolo spettacolo;
+    private Programma programma;
     private Integer numero;
     private Integer n_episodi;
     
-    public StagioneImpl(Spettacolo s,int n,int n_episodi){
-        this.spettacolo=s;
+    public StagioneImpl(Programma s,int n,int n_episodi){
+        this.programma=s;
         this.numero=n;
         this.n_episodi=n_episodi;
     }
     @Override
-    public  Spettacolo getSpettacolo(){
-        return this.spettacolo;
+    public  Programma getProgramma(){
+        return this.programma;
     }
     @Override
-     public void setSpettacolo(Spettacolo s){
-        this.spettacolo=s;
+     public void setProgramma(Programma s){
+        this.programma=s;
     }
     @Override
     public int getNumero(){

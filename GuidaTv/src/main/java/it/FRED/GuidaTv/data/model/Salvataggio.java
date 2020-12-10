@@ -4,13 +4,21 @@
  * and open the template in the editor.
  */
 package it.FRED.GuidaTv.data.model;
+
 import it.FRED.GuidaTv.framework.data.DataItem;
+
 /**
  *
  * @author DanieleDD
  */
-public interface SalvataggioCanali extends DataItem<Integer>{
-    Canale getCanali();
+public interface Salvataggio extends DataItem<Integer>{
+    Programma getProgramma();
+    void setProgramma(Programma s);
+    
+    Genere getGenere();
+    void setGenere(Genere g);
+    
+    Canale getCanale();
     void setCanale(Canale c);
     
     Utente getUtente();

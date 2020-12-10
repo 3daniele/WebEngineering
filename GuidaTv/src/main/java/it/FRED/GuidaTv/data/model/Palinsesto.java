@@ -18,9 +18,6 @@ public interface Palinsesto extends DataItem<Integer>{
     LocalDateTime getDataOra();
     void setDataOra(LocalDateTime l);
     
-    Film getFilm();
-    void setFilm(Film f);
-    
-    Spettacolo getSpettacolo();
-    void setSpettacolo(Spettacolo s);
+    Programma getProgramma();
+    void setProgramma(Programma s);
 }

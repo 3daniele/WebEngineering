@@ -11,6 +11,9 @@ import it.FRED.GuidaTv.framework.data.DataItem;
  */
 public interface Utente extends DataItem<Integer> {
     
+    String getRuolo();
+    void setRuolo(String r);
+    
     String getEmail();
     void setEmail(String t);
     

@@ -6,11 +6,10 @@
 package it.FRED.GuidaTv.data.impl;
 
 import it.FRED.GuidaTv.data.model.Canale;
-import it.FRED.GuidaTv.data.model.Film;
 import it.FRED.GuidaTv.data.model.Palinsesto;
-import it.FRED.GuidaTv.data.model.Spettacolo;
 import it.FRED.GuidaTv.framework.data.DataItemImpl;
 import java.time.LocalDateTime;
+import it.FRED.GuidaTv.data.model.Programma;
 
 
 
@@ -21,16 +20,15 @@ import java.time.LocalDateTime;
 public class PalinsestoImpl extends DataItemImpl<Integer> implements Palinsesto{
     private Canale canale;
     private LocalDateTime DataOra;
-    private Spettacolo spettacolo;
-    private Film film;
+    private Programma programma;
     
     
-    public PalinsestoImpl (Canale canale, LocalDateTime DataOra, Spettacolo s, Film film){
+    public PalinsestoImpl (Canale canale, LocalDateTime DataOra, Programma programma){
         this.canale = canale;
         this.DataOra = DataOra;
-        this.spettacolo = s;
-        this.film =film;
+        this.programma = programma;
     }
+    
     @Override
     public Canale getCanale(){
          return this.canale;
@@ -41,26 +39,20 @@ public class PalinsestoImpl extends DataItemImpl<Integer> implements Palinsesto{
     }
     
     @Override
-   public LocalDateTime getDataOra(){
+    public LocalDateTime getDataOra(){
          return this.DataOra;
-   }
-   public  void setDataOra(LocalDateTime l){
-         this.DataOra = l;
-   }
-    @Override
-   public Film getFilm(){
-         return this.film;
-   }
-   @Override
-   public  void setFilm(Film f){
-          this.film = f;
-   }
-    @Override
-    public  Spettacolo getSpettacolo(){
-         return this.spettacolo;
     }
     @Override
-   public  void setSpettacolo(Spettacolo s){
-         this.spettacolo = s;
+    public  void setDataOra(LocalDateTime l){
+         this.DataOra = l;
+    }
+   
+    @Override
+    public  Programma getProgramma(){
+         return this.programma;
+    }
+    @Override
+    public  void setProgramma(Programma s){
+         this.programma = s;
     }
 }
