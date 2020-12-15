@@ -11,7 +11,7 @@ public interface EpisodioDAO {
     
     Episodio getEpisodio(int episodio_key) throws DataException;
     
-    List<Episodio> getEpisodi();
+    List<Episodio> getEpisodi() throws DataException;
     
     List<Episodio> getEpisodi(Stagione stagione) throws DataException;
     

@@ -10,7 +10,7 @@ public interface CanaleDAO {
     
     Canale getCanale(int canale_key) throws DataException;
     
-    List<Canale> getCanali();
+    List<Canale> getCanali() throws DataException;
     
     void storeCanale(Canale canale) throws DataException;
     

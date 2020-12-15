@@ -12,7 +12,7 @@ public interface PalinsestoDAO {
     
     Palinsesto getPalinsesto(int palinsesto_key) throws DataException;
     
-    List<Palinsesto> getPalinsesti();
+    List<Palinsesto> getPalinsesti() throws DataException;
     
     List<Palinsesto> getPalinsesti(Canale canale) throws DataException;
     

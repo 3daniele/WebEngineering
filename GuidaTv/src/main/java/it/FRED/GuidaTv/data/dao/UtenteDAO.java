@@ -10,7 +10,7 @@ public interface UtenteDAO {
     
     Utente getUtente(int utente_key) throws DataException;
     
-    List<Utente> getUtenti();
+    List<Utente> getUtenti() throws DataException;
     
     void storeUtente(Utente utente) throws DataException;
     

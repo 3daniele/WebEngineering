@@ -10,7 +10,7 @@ public interface GenereDAO {
     
     Genere getGenere(int genere_key) throws DataException;
     
-    List<Genere> getGeneri();
+    List<Genere> getGeneri() throws DataException;
     
     void storeGenere(Genere genere) throws DataException;
     

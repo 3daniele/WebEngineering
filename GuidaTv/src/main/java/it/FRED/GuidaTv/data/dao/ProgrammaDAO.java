@@ -11,7 +11,7 @@ public interface ProgrammaDAO {
     
     Programma getProgramma(int programma_key) throws DataException;
     
-    List<Programma> getProgrammi();
+    List<Programma> getProgrammi() throws DataException;
     
     List<Programma> getProgrammi(Utente editore) throws DataException;
     

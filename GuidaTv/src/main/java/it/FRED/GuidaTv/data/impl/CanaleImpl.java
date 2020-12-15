@@ -16,9 +16,14 @@ public class CanaleImpl extends DataItemImpl<Integer> implements Canale{
     private String nome;
     private String gruppo;
     
-    public CanaleImpl(String n, String g){
+    public CanaleImpl (String n, String g){
         this.nome = n;
         this.gruppo = g;
+    }
+    
+    public CanaleImpl() {
+        this.nome = "";
+        this.gruppo = "";
     }
     
     

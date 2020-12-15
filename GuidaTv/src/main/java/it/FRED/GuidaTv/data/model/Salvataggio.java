@@ -23,5 +23,4 @@ public interface Salvataggio extends DataItem<Integer>{
     
     Utente getUtente();
     void setUtente(Utente u);
-    
 }

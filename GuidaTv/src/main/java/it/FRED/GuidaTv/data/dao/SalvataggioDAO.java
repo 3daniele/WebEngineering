@@ -14,7 +14,7 @@ public interface SalvataggioDAO {
     
     Salvataggio getSalvataggio(int salvataggio_key) throws DataException;
     
-    List<Salvataggio> getSalvataggi();
+    List<Salvataggio> getSalvataggi() throws DataException;
     
     List<Salvataggio> getSalvataggi(Canale canale);
     

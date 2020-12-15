@@ -11,7 +11,7 @@ public interface StagioneDAO {
     
     Stagione getStagione(int stagione_key) throws DataException;
     
-    List<Stagione> getStagioni();
+    List<Stagione> getStagioni() throws DataException;
     
     List<Stagione> getStagioni(Programma serietv) throws DataException;
     
