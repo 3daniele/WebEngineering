@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.FRED.GuidaTv.data.impl;
 
 
@@ -10,10 +5,7 @@ import it.FRED.GuidaTv.data.model.Programma;
 import it.FRED.GuidaTv.data.model.Stagione;
 import it.FRED.GuidaTv.framework.data.DataItemImpl;
 
-/**
- *
- * @author Francesca
- */
+
 public class StagioneImpl extends DataItemImpl<Integer> implements Stagione{
     private Programma programma;
     private Integer numero;

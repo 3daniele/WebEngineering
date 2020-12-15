@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.FRED.GuidaTv.data.impl;
 
 import it.FRED.GuidaTv.data.model.Canale;
@@ -12,11 +7,6 @@ import java.time.LocalDateTime;
 import it.FRED.GuidaTv.data.model.Programma;
 
 
-
-/**
- *
- * @author Francesca
- */
 public class PalinsestoImpl extends DataItemImpl<Integer> implements Palinsesto{
     private Canale canale;
     private LocalDateTime DataOra;

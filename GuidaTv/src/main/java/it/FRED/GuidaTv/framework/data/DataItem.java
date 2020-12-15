@@ -1,8 +1,5 @@
 package it.FRED.GuidaTv.framework.data;
 
-/*
- * @param <KT> the key type
- */
 public interface DataItem<KT> {
 
     KT getKey();

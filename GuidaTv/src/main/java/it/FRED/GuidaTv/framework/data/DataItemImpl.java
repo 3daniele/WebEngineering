@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.FRED.GuidaTv.framework.data;
 
-/**
- *
- * @author Francesca
- */
+
 public class DataItemImpl<KT> implements DataItem<KT>{
  
     private KT key;

@@ -1,24 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.FRED.GuidaTv.data.impl;
 
 import it.FRED.GuidaTv.data.model.Episodio;
 import it.FRED.GuidaTv.data.model.Stagione;
 import it.FRED.GuidaTv.framework.data.DataItemImpl;
 
-/**
- *
- * @author Francesca
- */
 public class EpisodioImpl extends DataItemImpl<Integer> implements Episodio {
      
     private Stagione stagione;
     private int numero;
     private int durata;
     private String descrizione;
+    
+    public EpisodioImpl(){
+        this.stagione = null;
+        this.durata = 0;
+        this.descrizione = null;
+        this.numero = 0;
+    }
     
     public EpisodioImpl(Stagione stagione, int numero, String descrizione, int durata){
       this.stagione = stagione;
