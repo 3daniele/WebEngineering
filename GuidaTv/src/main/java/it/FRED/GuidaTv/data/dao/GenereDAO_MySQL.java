@@ -138,7 +138,45 @@ public class GenereDAO_MySQL extends DAO implements GenereDAO{
         
     }
     
-    
+     @Override
+    public void storeGenere(Genere genere) throws DataException{
+        
+        try{
+            if(genere.getKey() != null && genere.getKey() > 0){
+                if(genere instanceof DataItemProxy && !((DataItemProxy) genere).isModified()){
+                    return;
+                }
+                
+                //update
+                //uGenere = connection.prepareStatement("UPDATE genere SET nome = ? WHERE id_genere = ?");
+                uGenere.setInt(2, genere.getKey());
+                uGenere.setString(1, genere.getNome());
+                if(uGenere.executeUpdate() == 0){
+                    throw new DataException("Errore nell'update");
+                }
+            }else{
+                //insert
+                iGenere.setString(1, genere.getNome());
+                
+                if(iGenere.executeUpdate() == 1){
+                    try(ResultSet keys = iGenere.getGeneratedKeys()){
+                        if(keys.next()){
+                            int key = keys.getInt(1);
+                            genere.setKey(key);
+                            dataLayer.getCache().add(Genere.class, genere);
+                        }
+                        
+                    }
+                }
+            }
+            
+            if(genere instanceof DataItemProxy)
+                ((DataItemProxy) genere).setModified(false);
+            
+        }catch(SQLException ex){
+            throw new DataException("Impossibile eseguire la store", ex);
+        }
+    }
     
     
 }
