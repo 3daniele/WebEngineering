@@ -12,6 +12,8 @@ public interface UtenteDAO {
     
     List<Utente> getUtenti() throws DataException;
     
+    List<Utente> getUtenti(String ruolo) throws DataException;
+    
     void storeUtente(Utente utente) throws DataException;
     
 }
