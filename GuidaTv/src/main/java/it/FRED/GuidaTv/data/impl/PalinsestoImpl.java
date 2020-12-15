@@ -13,6 +13,12 @@ public class PalinsestoImpl extends DataItemImpl<Integer> implements Palinsesto{
     private Programma programma;
     
     
+    public PalinsestoImpl(){
+        this.canale = null;
+        this.DataOra = null;
+        this.programma = null;
+    }
+    
     public PalinsestoImpl (Canale canale, LocalDateTime DataOra, Programma programma){
         this.canale = canale;
         this.DataOra = DataOra;

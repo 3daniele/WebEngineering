@@ -10,7 +10,7 @@ public interface Utente extends DataItem<Integer> {
     void setEmail(String t);
     
     String getPassword();
-    void setPassowrd(String p);
+    void setPassword(String p);
     
     String getStatus();
     void setStatus(String s);

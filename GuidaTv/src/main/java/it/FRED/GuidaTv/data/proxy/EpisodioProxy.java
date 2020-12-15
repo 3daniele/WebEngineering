@@ -1,8 +1,8 @@
 package it.FRED.GuidaTv.data.proxy;
 
-import freemarker.log.Logger;
 import it.FRED.GuidaTv.data.impl.EpisodioImpl;
 import it.FRED.GuidaTv.data.model.Episodio;
+import freemarker.log.Logger;
 import it.FRED.GuidaTv.framework.data.DataItemProxy;
 import it.FRED.GuidaTv.framework.data.DataLayer;
 import it.FRED.GuidaTv.framework.data.DataException;
@@ -23,6 +23,12 @@ public class EpisodioProxy extends EpisodioImpl implements DataItemProxy{
         this.dataLayer = d;
         this.modified = false;
         this.stagione_key = 0;
+    }
+    
+    @Override
+    public void setNome(String nome) {
+        super.setNome(nome);
+        this.modified = true;
     }
     
     @Override

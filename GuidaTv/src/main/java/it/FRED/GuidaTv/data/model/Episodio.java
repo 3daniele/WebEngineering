@@ -5,6 +5,9 @@ import it.FRED.GuidaTv.framework.data.DataItem;
 
 public interface Episodio extends DataItem<Integer>{
     
+    String getNome();
+    void setNome(String n);
+    
     Stagione getStagione();
     void setStagione(Stagione s);
     

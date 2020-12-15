@@ -192,7 +192,7 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
                 String descrizione = rs.getString("descrizione");
                 int durata = rs.getInt("durata");
                 //Stagione stagione, int numero, String descrizione, int durata
-                Episodio e= new EpisodioImpl(s,numero,descrizione,durata);
+                Episodio e= new EpisodioImpl("",s,numero,descrizione,durata);
                 
                 lista.add(e);
             }

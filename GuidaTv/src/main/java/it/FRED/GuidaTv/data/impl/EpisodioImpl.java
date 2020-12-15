@@ -10,20 +10,33 @@ public class EpisodioImpl extends DataItemImpl<Integer> implements Episodio {
     private int numero;
     private int durata;
     private String descrizione;
+    private String nome;
     
     public EpisodioImpl(){
         this.stagione = null;
         this.durata = 0;
         this.descrizione = null;
         this.numero = 0;
+        this.nome = null;
     }
     
-    public EpisodioImpl(Stagione stagione, int numero, String descrizione, int durata){
+    public EpisodioImpl(String nome,Stagione stagione, int numero, String descrizione, int durata){
+      this.nome = nome;
       this.stagione = stagione;
       this.durata = durata;
       this.descrizione = descrizione;
       this.numero = numero;
     }
+    
+    @Override
+   public String getNome(){
+       return this.nome;
+   }
+    
+   @Override
+   public void setNome(String n){
+       this.nome = n;
+   }
     
     @Override
     public Stagione getStagione(){

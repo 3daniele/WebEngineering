@@ -11,6 +11,12 @@ public class UtenteImpl extends DataItemImpl<Integer> implements Utente{
     private String status;
     private String ruolo;
     
+    public UtenteImpl(){
+        this.email = null;
+        this.password = null;
+        this.status = null;
+        this.ruolo = null;
+    }
     
     public UtenteImpl(String email, String password, String status){
         super();
@@ -40,7 +46,7 @@ public class UtenteImpl extends DataItemImpl<Integer> implements Utente{
         return this.password;
     }
       @Override
-    public void setPassowrd(String p){
+    public void setPassword(String p){
         this.password = p;
     }
       @Override

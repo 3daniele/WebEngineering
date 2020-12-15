@@ -3,6 +3,9 @@ import it.FRED.GuidaTv.framework.data.DataItem;
 
 public interface Programma extends DataItem<Integer>{
     
+    String getNome();
+    void setNome(String n);
+    
     int getDurata();
     void setDurata(int d);
     

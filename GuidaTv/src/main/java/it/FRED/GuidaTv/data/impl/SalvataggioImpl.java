@@ -14,6 +14,13 @@ public class SalvataggioImpl extends DataItemImpl<Integer> implements Salvataggi
     private Programma programma;
     private Utente utente;
     
+    public SalvataggioImpl(){
+        this.canale = null;
+        this.genere = null;
+        this.programma = null;
+        this.utente = null;
+    }
+    
     public SalvataggioImpl(Canale canale, Genere genere, Programma programma, Utente utente) {
         this.canale = canale;
         this.genere = genere;

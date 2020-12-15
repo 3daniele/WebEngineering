@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 10, 2020 alle 16:14
+-- Creato il: Dic 15, 2020 alle 17:51
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.2.30
 
@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `episodio` (
   `descrizione` text NOT NULL,
   `stagione` int(7) NOT NULL,
   `durata` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id_episodio`),
   KEY `stagione` (`stagione`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -100,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `programma` (
   `tipo` varchar(25) NOT NULL,
   `editore` int(11) NOT NULL,
   `immagine` varchar(100) DEFAULT NULL,
+  `nome` varchar(30) NOT NULL,
   PRIMARY KEY (`id_programma`),
   KEY `editore` (`editore`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

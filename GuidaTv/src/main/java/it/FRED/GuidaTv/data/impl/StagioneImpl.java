@@ -8,9 +8,16 @@ import it.FRED.GuidaTv.framework.data.DataItemImpl;
 
 public class StagioneImpl extends DataItemImpl<Integer> implements Stagione{
     private Programma programma;
-    private Integer numero;
-    private Integer n_episodi;
+    private int numero;
+    private int n_episodi;
     private String immagine;
+    
+    public StagioneImpl(){
+        this.programma = null;
+        this.numero = 0;
+        this.n_episodi = 0;
+        this.immagine = null;
+    }
     
     public StagioneImpl(Programma s,int n,int n_episodi,String immagine){
         this.programma=s;
@@ -18,26 +25,32 @@ public class StagioneImpl extends DataItemImpl<Integer> implements Stagione{
         this.n_episodi=n_episodi;
         this.immagine=immagine;
     }
+    
     @Override
     public  Programma getProgramma(){
         return this.programma;
     }
+    
     @Override
      public void setProgramma(Programma s){
         this.programma=s;
     }
+     
     @Override
     public int getNumero(){
         return this.numero;
     }
+    
     @Override
     public void setNumero(int n){
        this.numero=n; 
     }
+    
     @Override
     public int getNEpisodi(){
         return this.n_episodi;
     }
+    
     @Override
     public  void setNEpisodi(int n){
         this.n_episodi=n;
@@ -47,6 +60,7 @@ public class StagioneImpl extends DataItemImpl<Integer> implements Stagione{
     public String getImmagine(){
         return this.immagine;
     }
+    
     @Override
     public void setImmagine(String link){
         this.immagine=link;
