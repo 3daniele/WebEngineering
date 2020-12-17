@@ -25,6 +25,9 @@ public class ProgrammaDAO_MySQL extends DAO implements ProgrammaDAO{
     public ProgrammaDAO_MySQL(DataLayer d){
         super(d);
     }
+
+    public ProgrammaDAO_MySQL() {
+     }
     
     @Override
     public void init() throws DataException{

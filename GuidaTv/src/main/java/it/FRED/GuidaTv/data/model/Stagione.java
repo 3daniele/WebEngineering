@@ -9,8 +9,8 @@ public interface Stagione extends DataItem<Integer>{
     int getNumero();
     void setNumero(int n);
     
-    int getNEpisodi();
-    void setNEpisodi(int n);
+    String getDescrizione();
+    void setDescrizione(String n);
     
     String getImmagine();
     void setImmagine(String link);

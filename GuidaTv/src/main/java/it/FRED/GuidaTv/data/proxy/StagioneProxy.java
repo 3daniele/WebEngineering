@@ -28,8 +28,8 @@ public class StagioneProxy extends StagioneImpl implements DataItemProxy{
     }
     
     @Override
-    public void setNEpisodi(int n) {
-        super.setNEpisodi(n);
+    public void setDescrizione(String n) {
+        super.setDescrizione(n);
         this.modified = true;
     }
     
