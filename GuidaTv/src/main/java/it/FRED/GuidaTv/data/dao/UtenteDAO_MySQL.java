@@ -22,6 +22,11 @@ public class UtenteDAO_MySQL  extends DAO implements UtenteDAO{
     public UtenteDAO_MySQL(DataLayer d){
         super(d);
     }
+
+    
+    
+    public UtenteDAO_MySQL(){
+    }
     
     @Override
     public void init() throws DataException{

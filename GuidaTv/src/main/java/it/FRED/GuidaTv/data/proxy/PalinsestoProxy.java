@@ -27,8 +27,14 @@ public class PalinsestoProxy extends PalinsestoImpl implements DataItemProxy{
     }
     
     @Override
-    public void setDataOra(LocalDateTime t) {
-        super.setDataOra(t);
+    public void setData(LocalDate t) {
+        super.setData(t);
+        this.modified = true;
+    }
+    
+    @Override
+    public void setOra(Localtime t) {
+        super.setOra(t);
         this.modified = true;
     }
     
