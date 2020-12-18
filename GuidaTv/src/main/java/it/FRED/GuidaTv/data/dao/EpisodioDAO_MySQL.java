@@ -15,6 +15,7 @@ import it.FRED.GuidaTv.data.proxy.EpisodioProxy;
 import it.FRED.GuidaTv.data.impl.EpisodioImpl;
 import it.FRED.GuidaTv.data.model.Episodio;
 import it.FRED.GuidaTv.data.model.Stagione;
+import it.FRED.GuidaTv.data.dao.StagioneDAO_MySQL;
 
 public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
     
@@ -32,8 +33,8 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
             super.init();
             sEpisodi = connection.prepareStatement("SELECT *FROM Episodio");
             sEpisodioByID = connection.prepareStatement("SELECT *FROM Episodio WHERE id_episodio = ?");
-            iEpisodio = connection.prepareStatement("INSERT INTO Episodio(numero, descrizione, stagione, durata) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uEpisodio = connection.prepareStatement("UPDATE Episodio SET numero = ?, descrizione = ?, stagione = ?, durata = ? WHERE id_episodio = ?");
+            iEpisodio = connection.prepareStatement("INSERT INTO Episodio(numero, descrizione, stagione, durata, nome) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uEpisodio = connection.prepareStatement("UPDATE Episodio SET numero = ?, descrizione = ?, stagione = ?, durata = ?, nome = ? WHERE id_episodio = ?");
             dEpisodio = connection.prepareStatement("DELETE FROM Episodio WHERE id_episodio = ?");
             sEpisodiByStagione = connection.prepareStatement("SELECT *FROM episodio WHERE stagione = ?");
         }catch(SQLException ex){
@@ -66,10 +67,15 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
         
         try{
             e.setKey(rs.getInt("id_episodio"));
+            e.setNome(rs.getSring("nome"));
             e.setDescrizione(rs.getString("descrizione"));
             e.setDurata(rs.getInt("durata"));
             e.setNumero(rs.getInt("numero"));
-            //usare metodo getStagioneByID e.setStagione();
+
+            int id_stagione = rs.getInt("stagione");
+            StagioneDAO_MySQL dao = new StagioneDAO_MySQL();
+            Stagione stagione = dao.getStagione(id_stagione);
+            e.setStagione(stagione);
         }catch(SQLException ex){
             throw new DataException("Errore nella creazione ", ex);
         }
@@ -108,17 +114,18 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
         //numero, descrizione, stagione, durata
         try(ResultSet rs = sEpisodi.executeQuery()){
             while(rs.next()){
+                String nome = rs.getString("nome");
                 int numero  = rs.getInt("numero");
                 String descrizione = rs.getString("descrizione");
                 int durata = rs.getInt("durata");
-                int stagione = rs.getInt("stagione");
                 
-                /*
-                StagioneDAO_MySQL pop = new StagioneDAO_MySQL();
-                Stagione c = pop.getStagioneByID(stagione)
-                */
+                int id_stagione = rs.getInt("stagione");
+                StagioneDAO_MySQL dao = new StagioneDAO_MySQL();
+                Stagione stagione = dao.getStagione(id_stagione);
+
+                Episodio episodio = new EpisodioImpl(nome, stagione, numero, descrizione, durata);
                 
-                //lista.add();
+                lista.add(episodio);
             }
         }catch(SQLException ex){
             throw new DataException("Impossibile caricare", ex);
@@ -139,11 +146,12 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
                 
                 //update
                 //uEpisodio = connection.prepareStatement("UPDATE Episodio SET numero = ?, descrizione = ?, stagione = ?, durata = ?");
-                uEpisodio.setInt(5, episodio.getKey());
+                uEpisodio.setInt(6, episodio.getKey());
                 uEpisodio.setInt(1, episodio.getNumero());
                 uEpisodio.setString(2, episodio.getDescrizione());
                 uEpisodio.setInt(3, episodio.getStagione().getKey());
                 uEpisodio.setInt(4, episodio.getDurata());
+                uEpisodio.setString(5, episodio.getNome());
                 
                 if(uEpisodio.executeUpdate() == 0){
                     throw new DataException("Errore nell'update");
@@ -154,6 +162,7 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
                 iEpisodio.setString(2, episodio.getDescrizione());
                 iEpisodio.setInt(3, episodio.getStagione().getKey());
                 iEpisodio.setInt(4, episodio.getDurata());
+                iEpisodio.setString(5, episodio.getNome());
                 
                 if(iEpisodio.executeUpdate() == 1){
                     try(ResultSet keys = iEpisodio.getGeneratedKeys()){
@@ -188,11 +197,12 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
         
         try(ResultSet rs = sEpisodi.executeQuery()){
             while(rs.next()){
+                String nome = rs.getString("nome");
                 int numero  = rs.getInt("numero");
                 String descrizione = rs.getString("descrizione");
                 int durata = rs.getInt("durata");
                 //Stagione stagione, int numero, String descrizione, int durata
-                Episodio e= new EpisodioImpl("",s,numero,descrizione,durata);
+                Episodio e= new EpisodioImpl(nome, s, numero, descrizione, durata);
                 
                 lista.add(e);
             }

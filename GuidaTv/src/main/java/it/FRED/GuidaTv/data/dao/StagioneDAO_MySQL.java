@@ -27,6 +27,11 @@ public class StagioneDAO_MySQL extends DAO implements StagioneDAO {
     public StagioneDAO_MySQL(DataLayer d){
         super(d);
     }
+
+    // aggiunto costruttore vuoto per dao
+    public StagioneDAO_MySQL() {
+        super();
+    }
     
     @Override
     public void init() throws DataException{

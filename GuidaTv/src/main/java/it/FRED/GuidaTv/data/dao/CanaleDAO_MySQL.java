@@ -22,6 +22,10 @@ public class CanaleDAO_MySQL extends DAO implements CanaleDAO {
     public CanaleDAO_MySQL(DataLayer d) {
         super(d);
     }
+
+    public CanaleDAO_MySQL() {
+        super();
+    }
     
     @Override
     public void init() throws DataException {

@@ -26,8 +26,10 @@ public class ProgrammaDAO_MySQL extends DAO implements ProgrammaDAO{
         super(d);
     }
 
+    // aggiunto costruttore vuoto per dao
     public ProgrammaDAO_MySQL() {
-     }
+        super();
+    }
     
     @Override
     public void init() throws DataException{

@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class PalinsestoImpl extends DataItemImpl<Integer> implements Palinsesto{
     private Canale canale;
     private LocalDate data;
-     private LocalTime ora;
+    private LocalTime ora;
     private Programma programma;
     
     

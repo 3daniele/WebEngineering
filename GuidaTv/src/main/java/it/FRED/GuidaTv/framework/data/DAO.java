@@ -12,6 +12,11 @@ public class DAO {
         this.connection = d.getConnection();
     }
 
+    public DAO() {
+        this.dataLayer = null;
+        this.connection = null;
+    }
+
     protected DataLayer getDataLayer() {
         return dataLayer;
     }

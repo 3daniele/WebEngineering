@@ -15,8 +15,12 @@ public interface PalinsestoDAO {
     List<Palinsesto> getPalinsesti() throws DataException;
     
     List<Palinsesto> getPalinsesti(Canale canale) throws DataException;
-    
-    List<Palinsesto> getPalinsesto(Programma programma) throws DataException;
+
+    List<Palinsesto> getPalinsestiByDate(LocalDate data) throws DataException;
+
+    List<Palinsesto> getPalinsestiByTime(LocalDate data, LocalTime ora) throws DataException;
+
+    List<Palinsesto> getPalinsesti(Programma programma) throws DataException;
     
     void storePalinsesto(Palinsesto palinsesto) throws DataException;
     

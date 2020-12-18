@@ -22,10 +22,10 @@ public class UtenteDAO_MySQL  extends DAO implements UtenteDAO{
     public UtenteDAO_MySQL(DataLayer d){
         super(d);
     }
-
     
-    
+    // aggiunto costruttore per dao
     public UtenteDAO_MySQL(){
+        super();
     }
     
     @Override
