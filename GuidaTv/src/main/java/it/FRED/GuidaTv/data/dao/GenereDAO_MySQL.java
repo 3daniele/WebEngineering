@@ -22,6 +22,10 @@ public class GenereDAO_MySQL extends DAO implements GenereDAO{
     public GenereDAO_MySQL(DataLayer d){
         super(d);
     }
+
+    public GenereDAO_MySQL() {
+        super();
+    }
     
     @Override
     public void init() throws DataException{
