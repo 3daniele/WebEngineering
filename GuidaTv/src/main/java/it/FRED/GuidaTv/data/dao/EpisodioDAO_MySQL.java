@@ -67,7 +67,7 @@ public class EpisodioDAO_MySQL extends DAO implements EpisodioDAO{
         
         try{
             e.setKey(rs.getInt("id_episodio"));
-            e.setNome(rs.getSring("nome"));
+            e.setNome(rs.getString("nome"));
             e.setDescrizione(rs.getString("descrizione"));
             e.setDurata(rs.getInt("durata"));
             e.setNumero(rs.getInt("numero"));

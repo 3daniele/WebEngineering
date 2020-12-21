@@ -14,19 +14,18 @@ import java.util.ArrayList;
 
 import it.FRED.GuidaTv.data.proxy.SalvataggioProxy;
 import it.FRED.GuidaTv.data.impl.SalvataggioImpl;
-import it.FRED.GuidaTv.data.impl.UtenteImpl;
 import it.FRED.GuidaTv.data.model.Salvataggio;
 import it.FRED.GuidaTv.data.model.Canale;
-import it.FRED.GuidaTv.data.model.Palinsesto;
 import it.FRED.GuidaTv.data.dao.CanaleDAO_MySQL;
 import it.FRED.GuidaTv.data.model.Programma;
 import it.FRED.GuidaTv.data.dao.ProgrammaDAO_MySQL;
-import it.FRED.GuidaTv.data.model.Utente;
-import it.FRED.GuidaTv.data.dao.GenereDAO;
+import it.FRED.GuidaTv.data.model.Genere;
 import it.FRED.GuidaTv.data.dao.GenereDAO_MySQL;
+import it.FRED.GuidaTv.data.model.Utente;
 
 
-public class SalvataggioDAO_MySQL {
+
+public class SalvataggioDAO_MySQL extends DAO implements SalvataggioDAO {
     
     private PreparedStatement sSalvataggi, sSalavataggioByID, sSalvataggiByUtente;
     //necessari solo se ci sono problemi con i null
@@ -49,7 +48,7 @@ public class SalvataggioDAO_MySQL {
             //iSalavataggioGenere = connection.prepareStatement("INSERT INTO Salvataggio utente = ?, genere = ?");
             //iSalavataggioProgramma = connection.prepareStatement("INSERT INTO Salvataggio utente = ?, programma = ?");
             iSalvataggio = connection.prepareStatement("INSERT INTO Salvataggio(utente, genere, canale, programma) VALUES(?,?,?,?)");
-            dSalvataggio = connection.preparedStatement("DELETE FROM Salvataggio where id_salvataggio = ?");
+            dSalvataggio = connection.prepareStatement("DELETE FROM Salvataggio where id_salvataggio = ?");
         }catch(SQLException ex){
             throw new DataException("Errore datalayer", ex);
         }
@@ -61,9 +60,7 @@ public class SalvataggioDAO_MySQL {
             sSalvataggi.close();
             sSalavataggioByID.close();
             sSalvataggiByUtente.close();
-            iSalvataggioCanale.close();
-            iSalvataggioGenere.close();
-            iSalvataggioProgramma.close();
+            iSalvataggio.close();
             dSalvataggio.close();
         }catch(SQLException ex){
             throw new DataException("Errore nella chiusura", ex);
@@ -93,10 +90,10 @@ public class SalvataggioDAO_MySQL {
             ProgrammaDAO_MySQL p = new ProgrammaDAO_MySQL();
             GenereDAO_MySQL g = new GenereDAO_MySQL();
 
-            s.setCanale(u.getUtente(id_utente));
-            s.setCanale(c.getCanale(id_canale);
-            s.setProgramma(p.getProgramma(id_programma);
-            s.setGenere(g.getGenere(id_genere);
+            s.setUtente(u.getUtente(id_utente));
+            s.setCanale(c.getCanale(id_canale));
+            s.setProgramma(p.getProgramma(id_programma));
+            s.setGenere(g.getGenere(id_genere));
 
         }catch(SQLException ex){
             throw new DataException("Errore nella creazione", ex);
@@ -128,13 +125,12 @@ public class SalvataggioDAO_MySQL {
     }
 
     @Override
-    public List<Salvataggio> getSalvataggi(){
+    public List<Salvataggio> getSalvataggi() throws DataException {
 
         List<Salvataggio> lista = new ArrayList();
-
+        
         try(ResultSet rs = sSalvataggi.executeQuery()){
             while(rs.next()){
-                int id_salvataggio = rs.getInt("id_salvataggio");
                 int id_utente = rs.getInt("utente");
                 int id_canale = rs.getInt("canale");
                 int id_programma = rs.getInt("programma");
@@ -149,7 +145,7 @@ public class SalvataggioDAO_MySQL {
                 Canale canale = c.getCanale(id_canale);
                 Programma programma = p.getProgramma(id_programma);
                 Genere genere = g.getGenere(id_genere);
-
+                
                 Salvataggio s = new SalvataggioImpl(canale, genere, programma, utente);
 
                 lista.add(s);
@@ -158,12 +154,13 @@ public class SalvataggioDAO_MySQL {
         }catch(SQLException ex){
             throw new DataException("Impossibile caricare", ex);
         }
+ 
         return lista;
 
     }
 
     @Override
-    public List<Salvataggio> getSalvataggi(Utente a){
+    public List<Salvataggio> getSalvataggi(Utente a) throws DataException {
 
         List<Salvataggio> lista = new ArrayList();
 
@@ -219,7 +216,6 @@ public class SalvataggioDAO_MySQL {
             throw new DataException("Errore nella DELETE", ex);
         }
 
-        return false;
     }
 
     @Override
@@ -227,17 +223,17 @@ public class SalvataggioDAO_MySQL {
 
         try{
             //utente, genere, canale, programma
-            iSalvataggio.setInt(1, salvataggio.getUtente());
-            iSalvataggio.setInt(2, salvataggio.getGenere());
-            iSalvataggio.setInt(3, salvataggio.getCanale());
-            iSalvataggio.setInt(4, salvataggio.getProgramma());
+            iSalvataggio.setInt(1, salvataggio.getUtente().getKey());
+            iSalvataggio.setInt(2, salvataggio.getGenere().getKey());
+            iSalvataggio.setInt(3, salvataggio.getCanale().getKey());
+            iSalvataggio.setInt(4, salvataggio.getProgramma().getKey());
 
             if(iSalvataggio.executeUpdate() == 1){
                 try(ResultSet keys = iSalvataggio.getGeneratedKeys()){
                     if(keys.next()){
                         int key = keys.getInt(1);
                         salvataggio.setKey(key);
-                        DataLayer.getCache().add(Salvataggio.class, salvataggio);
+                        dataLayer.getCache().add(Salvataggio.class, salvataggio);
                     }
                 }
             }

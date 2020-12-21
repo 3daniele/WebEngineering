@@ -53,7 +53,7 @@ public class PalinsestoImpl extends DataItemImpl<Integer> implements Palinsesto{
          return this.ora;
     }
     @Override
-    public  void setOra(LocalTime l){
+    public void setOra(LocalTime l){
          this.ora = l;
     }
     

@@ -18,10 +18,9 @@ import it.FRED.GuidaTv.data.dao.CanaleDAO_MySQL;
 import it.FRED.GuidaTv.data.model.Programma;
 import it.FRED.GuidaTv.data.dao.ProgrammaDAO_MySQL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
+public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDAO {
     
     private PreparedStatement sPalinsestoByID, sPalinsesti, sPalinsestoByCanale, sPalinsestoByProgramma, sPalinsestoByDate, sPalinsestoByDateTime;
     private PreparedStatement iPalinsesto, uPalinsesto, dPalinsesto;
@@ -53,7 +52,7 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
     
     
     @Override
-    public void destroy() throws DataException{
+    public void destroy() throws DataException {
         try{
             sPalinsestoByID.close();
             sPalinsesti.close();
@@ -71,11 +70,11 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
     }
   
     @Override
-    public PalinsestoProxy createPalinsesto(){
+    public PalinsestoProxy createPalinsesto() {
         return new PalinsestoProxy(getDataLayer());
     }
     
-    private PalinsestoProxy createPalinsesto(ResultSet rs)throws DataException{
+    private PalinsestoProxy createPalinsesto(ResultSet rs)throws DataException {
         PalinsestoProxy p = createPalinsesto();
         
         try{
@@ -99,8 +98,8 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
         return p;
     }
     
-    
-    public Palinsesto getEpisodio(int palinsesto_key) throws DataException{
+    @Override
+    public Palinsesto getPalinsesto(int palinsesto_key) throws DataException {
         Palinsesto e = null;
         
         if(dataLayer.getCache().has(Palinsesto.class, palinsesto_key)){
@@ -124,7 +123,7 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
     }
 
     @Override
-    public List<Palinsesto> getPalinsesti() throws DataException{
+    public List<Palinsesto> getPalinsesti() throws DataException {
         
         List<Palinsesto> lista = new ArrayList();
 
@@ -151,14 +150,14 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
     }
 
     @Override
-    public List<Palinsesto> getPalinsesti(Canale c) throws DataException{
+    public List<Palinsesto> getPalinsesti(Canale c) throws DataException {
         
         List<Palinsesto> lista = new ArrayList();
 
         try {
             sPalinsestoByCanale.setInt(1, c.getKey());
         } catch(SQLException ex) {
-            
+            System.out.println(ex);
         }
         try (ResultSet rs = sPalinsestoByCanale.executeQuery()){
             while(rs.next()){
@@ -180,14 +179,14 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
     }
 
     @Override
-    public List<Palinsesto> getPalinsesti(LocalDate data) throws DataException{
+    public List<Palinsesto> getPalinsesti(LocalDate data) throws DataException {
         
         List<Palinsesto> lista = new ArrayList();
 
         try {
             sPalinsestoByDate.setObject(1, data);
         } catch(SQLException ex) {
-            
+            System.out.println(ex);
         }
         try (ResultSet rs = sPalinsestoByDate.executeQuery()){
             while(rs.next()){
@@ -211,7 +210,7 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
     }
 
     @Override
-    public List<Palinsesto> getPalinsesti(LocalDate data, LocalTime ora) throws DataException{
+    public List<Palinsesto> getPalinsesti(LocalDate data, LocalTime ora) throws DataException {
         
         List<Palinsesto> lista = new ArrayList();
 
@@ -219,7 +218,7 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
             sPalinsestoByDateTime.setObject(1, data);
             sPalinsestoByDateTime.setObject(2, ora);
         } catch(SQLException ex) {
-            
+            System.out.println(ex);
         }
         try (ResultSet rs = sPalinsestoByDateTime.executeQuery()){
             while(rs.next()){
@@ -250,7 +249,7 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
         try {
             sPalinsestoByProgramma.setInt(1, pr.getKey());
         } catch(SQLException ex) {
-            
+            System.out.println(ex);
         }
         try (ResultSet rs = sPalinsestoByCanale.executeQuery()){
             while(rs.next()){
@@ -261,7 +260,7 @@ public class PalinsestoDAO_MySQL extends DAO implements PalinsestoDao{
                 LocalDate data = rs.getObject("data", LocalDate.class);
                 LocalTime ora = rs.getObject("ora", LocalTime.class);
 
-                Palinsesto p = new PalinsestoImpl(c, data, pr, ora);
+                Palinsesto p = new PalinsestoImpl(canale, data, pr, ora);
                 
                 lista.add(p);
             }

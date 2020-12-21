@@ -1,5 +1,4 @@
 package it.FRED.GuidaTv.data.proxy;
-import freemarker.log.Logger;
 import it.FRED.GuidaTv.data.dao.CanaleDAO;
 import it.FRED.GuidaTv.data.dao.ProgrammaDAO;
 import it.FRED.GuidaTv.data.impl.PalinsestoImpl;
@@ -8,9 +7,8 @@ import it.FRED.GuidaTv.data.model.Programma;
 import it.FRED.GuidaTv.framework.data.DataItemProxy;
 import it.FRED.GuidaTv.framework.data.DataLayer;
 import it.FRED.GuidaTv.framework.data.DataException;
-import java.util.List;
-import java.util.logging.Level;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class PalinsestoProxy extends PalinsestoImpl implements DataItemProxy{
     protected boolean modified;
@@ -33,7 +31,7 @@ public class PalinsestoProxy extends PalinsestoImpl implements DataItemProxy{
     }
     
     @Override
-    public void setOra(Localtime t) {
+    public void setOra(LocalTime t) {
         super.setOra(t);
         this.modified = true;
     }

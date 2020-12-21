@@ -16,13 +16,13 @@ public interface SalvataggioDAO {
     
     List<Salvataggio> getSalvataggi() throws DataException;
     
-    //List<Salvataggio> getSalvataggi(Canale canale);
+    //List<Salvataggio> getSalvataggi(Canale canale) throws DataException;
     
-    //List<Salvataggio> getSalvataggi(Genere genere);
+    //List<Salvataggio> getSalvataggi(Genere genere) throws DataException;
     
-    //List<Salvataggio> getSalvataggi(Programma programma);
+    //List<Salvataggio> getSalvataggi(Programma programma)throws DataException;
     
-    List<Salvataggio> getSalvataggi(Utente utente);
+    List<Salvataggio> getSalvataggi(Utente utente) throws DataException;
     
     void storeSalvataggio(Salvataggio salvataggio) throws DataException;
 
