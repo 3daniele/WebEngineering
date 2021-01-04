@@ -1,0 +1,12 @@
+<h2>Available articles</h2>
+<#if (articles?size>0)>
+<ul>
+    <#list articles as article>
+    <li>
+        ${strip_slashes(article.title)}&nbsp;<a href="write?k=${article.key}">[modify article]</a>
+        <br/><i>by ${article.author.name} ${article.author.surname}</i>        
+    </li>
+    </#list>
+</ul>
+</#if>
+<p><a href="write?k=0">Create a new article</a></p>

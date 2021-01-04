@@ -1,0 +1,144 @@
+
+body,html {
+    padding:0; 
+    margin:0;
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 11pt;
+    background: #73A2BD;
+}
+
+#header {    
+    right: 0;
+    height:50px;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+    background-color: #53829D;
+    color: white;
+
+}
+
+.subtitle {
+    font-size: 50%;
+}
+
+#body {
+    background-color: white;
+}
+
+#footer {
+    height:30px;        
+    font-size: 9pt;
+    text-align: center;
+    background-color: #73A2BD;
+    color: white;
+}
+
+input {
+    border: 1px solid #53829D;
+    background:  white;
+    font-size: 80%;
+}
+
+.menu {
+    background: white;
+    color: #73A2BD;
+    font-size: 80%;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.menu.horizontal {
+    border-bottom: 2px dashed #53829D;
+}
+
+.menu.vertical {
+    border-right: 2px dashed #53829D;
+}
+
+.menu a {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+}
+
+.menu a:hover {
+    background-color: #73A2BD;
+    color: white;
+}
+
+.menu ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.menu li {
+    margin:0;
+    padding:0;
+    display: block;
+
+}
+
+.menu.horizontal li {
+    margin: 0 5px;
+    float:left;
+}
+
+.menu.vertical li {
+    margin: 5px 0;    
+}
+
+.figures {
+    overflow: hidden;
+}
+
+.figure {
+    border: 1px solid #CCC;
+    padding: 5px;
+    margin: 10px;
+    float:right;     
+}
+
+.figure img {
+    display: block;     
+}
+
+.figure .caption {
+    display: block;     
+    text-align: center;
+    font-size: 80%;
+}
+
+select,input,textarea {
+    width: 85%;
+}
+
+select.small,input.small {
+    width: 15%;
+}
+
+select.medium,input.medium {
+    width: 40%;
+}
+
+.clabel {
+    font-weight: bold;
+}
+
+
+
+@media only screen and (max-width: 959px) {
+    body,html {    
+        font-size: 10pt;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .menu, .menu.horizontal, .menu.vertical { 
+        border-bottom: 2px dashed #53829D;
+        border-right: none;
+    }
+}
