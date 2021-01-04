@@ -4,14 +4,54 @@
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
+    
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     
-    
-    
+
+    <!--Contenuto preso da esempio giornale-->
+    <context-param>
+        <param-name>images.directory</param-name>
+        <!-- Tomcat must have write permissions on this folder -->
+        <param-value>d:/Java/TomcatWork</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.outline_template</param-name>
+        <param-value>outline.ftl.html</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.date_format</param-name>
+        <param-value>dd/MM/yyyy hh:mm:ss</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.debug</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.template_directory</param-name>
+        <param-value>templates</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.data.author</param-name>
+        <param-value>Giuseppe Della Penna</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.data.homepage_url</param-name>
+        <param-value>homepage</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.encoding</param-name>
+        <param-value>ISO-8859-1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.error_template</param-name>
+        <param-value>error.ftl.html</param-value>
+    </context-param>
+    <!--FINE CONTENUTI PRESI-->
     <resource-ref>
         <res-ref-name>jdbc/webeng_proj</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -19,3 +59,107 @@
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
 </web-app>
+
+<!--
+    <context-param>
+        <param-name>images.directory</param-name>
+        <!-- Tomcat must have write permissions on this folder -->
+        <param-value>d:/Java/TomcatWork</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.outline_template</param-name>
+        <param-value>outline.ftl.html</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.date_format</param-name>
+        <param-value>dd/MM/yyyy hh:mm:ss</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.debug</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.template_directory</param-name>
+        <param-value>templates</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.data.author</param-name>
+        <param-value>Giuseppe Della Penna</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.data.homepage_url</param-name>
+        <param-value>homepage</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.encoding</param-name>
+        <param-value>ISO-8859-1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view.error_template</param-name>
+        <param-value>error.ftl.html</param-value>
+    </context-param>   
+    <servlet>
+        <servlet-name>Image</servlet-name>
+        <servlet-class>it.univaq.f4i.iw.ex.newspaper.controller.RenderImage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Issue</servlet-name>
+        <servlet-class>it.univaq.f4i.iw.ex.newspaper.controller.MakeIssue</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Article</servlet-name>
+        <servlet-class>it.univaq.f4i.iw.ex.newspaper.controller.MakeArticle</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ComposeIssue</servlet-name>
+        <servlet-class>it.univaq.f4i.iw.ex.newspaper.controller.ComposeIssue</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListIssues</servlet-name>
+        <servlet-class>it.univaq.f4i.iw.ex.newspaper.controller.ListIssues</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WriteArticle</servlet-name>
+        <servlet-class>it.univaq.f4i.iw.ex.newspaper.controller.ComposeArticle</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Issue</servlet-name>
+        <url-pattern>/issue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Article</servlet-name>
+        <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComposeIssue</servlet-name>
+        <url-pattern>/compose</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Image</servlet-name>
+        <url-pattern>/image</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListIssues</servlet-name>
+        <url-pattern>/issues</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WriteArticle</servlet-name>
+        <url-pattern>/write</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>issues</welcome-file>
+    </welcome-file-list>
+    <resource-ref>
+        <res-ref-name>jdbc/webdb2</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+</web-app>
+
+-->
