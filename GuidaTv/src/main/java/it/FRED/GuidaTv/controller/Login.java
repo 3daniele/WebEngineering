@@ -14,6 +14,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Login extends GuidaTvBaseController{
     
@@ -23,6 +24,22 @@ public class Login extends GuidaTvBaseController{
         } else {
             (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), request, response);
         }
+    }
+  
+    private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, IOException, ServletException {
+        
+        try {
+            TemplateResult res = new TemplateResult(getServletContext());
+            request.setAttribute("strip_slashes", new SplitSlashesFmkExt());
+            res.activate("login.ftl.html", request, response);
+        } catch (Exception ex) {
+            System.out.println("errore");
+            /*
+            request.setAttribute("message", "Data access exception: " + ex.getMessage());
+            action_error(request, response);
+            */
+        }
+        
     }
 
     private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
@@ -49,6 +66,19 @@ public class Login extends GuidaTvBaseController{
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
+        
+        try {
+            action_default(request, response);
+
+        } catch (IOException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+
+        } catch (TemplateManagerException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+
+        }
     }
 
     

@@ -28,7 +28,11 @@ public abstract class GuidaTvBaseController extends HttpServlet {
         //variables leading to unexpected results. To always have different connections and statements on a per-request
         //(i.e., per-thread) basis, declare them in the doGet, doPost etc. (or in methods called by them) and 
         //(possibly) pass such variables through the request.
+        
+        System.out.println(ds);
+        
         try (GuidaTvDataLayer datalayer = new GuidaTvDataLayer(ds)) {
+            System.out.println(ds);
             datalayer.init();
             request.setAttribute("datalayer", datalayer);
             processRequest(request, response);
