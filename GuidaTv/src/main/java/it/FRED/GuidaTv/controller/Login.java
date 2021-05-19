@@ -26,66 +26,34 @@ public class Login extends GuidaTvBaseController{
     }
 
     private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
+        /*
+        String email="";
+        String password="";
         
         try {
-            TemplateResult res = new TemplateResult(getServletContext());
-            //aggiungiamo al template un wrapper che ci permette di chiamare la funzione stripSlashes
-            //add to the template a wrapper object that allows to call the stripslashes function
-            request.setAttribute("strip_slashes", new SplitSlashesFmkExt());
-            List<Author> authors = ((NewspaperDataLayer)request.getAttribute("datalayer")).getAuthorDAO().getAuthors();
-            request.setAttribute("authors", authors);
-            if (article_key > 0) {
-                Article article = ((NewspaperDataLayer)request.getAttribute("datalayer")).getArticleDAO().getArticle(article_key);
-                if (article != null) {
-                    request.setAttribute("article", article);
-                    res.activate("write_single.ftl.html", request, response);
-                } else {
-                    request.setAttribute("message", "Undefined article");
-                    action_error(request, response);
-                }
-            } else {
-                //article_key==0 indica un nuovo numero 
-                //article_key==0 indicates a new issue
-                Article article = ((NewspaperDataLayer)request.getAttribute("datalayer")).getArticleDAO().createArticle();
-                request.setAttribute("article", article);
-                res.activate("write_single.ftl.html", request, response);
-            }
+            
+            List<Utente> utenti = ((GuidaTvDataLayer)request.getAttribute("datalayer")).getUtenteDAO().getUtenti();
+            
+            email = request.getParameter("email");
+            password = request.getParameter("password");
+            
+            System.out.println(email);
+            System.out.println(password);
         } catch (DataException ex) {
             request.setAttribute("message", "Data access exception: " + ex.getMessage());
             action_error(request, response);
         }
+*/
     }
     
-
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
-
-        int k;
-        try {
-            k = SecurityLayer.checkNumeric(request.getParameter("k"));
-            action_login(request, response, k);
-        } catch (NumberFormatException ex) {
-            request.setAttribute("message", "Login not specified");
-            action_error(request, response);
-        } catch (IOException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-
-        } catch (TemplateManagerException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-
-        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
-        return "Render article servlet";
-    }// </editor-fold>
+        return "Render login servlet";
+    }
 }
